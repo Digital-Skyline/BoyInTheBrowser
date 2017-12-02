@@ -22,9 +22,9 @@ if(isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['pass
 
     $query = "INSERT INTO users(username,password,email) VALUES".
          "('$username', '$token', '$email')";
-    
+
     $result = $conn->query($query);
-    if (!$result){ 
+    if (!$result){
       echo "INSERT failed: $query<br>" . $conn->error . "<br><br>";
     }else{
       echo "INSERT Success!"."<br>";
@@ -42,7 +42,8 @@ echo <<<_END
     </head>
 
     <body>
-      <div class="loginbtn"><a href="Main.html">Home</a></div>
+      <div class="loginbtn"><a href="Login.php">Login</a></div>
+      <div class="loginbtn"><a href="index.php">Home</a></div>
 
       <h2>Let the Boy in your Browser keep you secure!</h2>
       <p class="lead">Analyze suspicious files to find Malware.</p>
@@ -59,7 +60,7 @@ echo <<<_END
               <input type="email" email="email" placeholder="Email" name="email">
               <input type="submit" id="submitButton" name="submit" class="submitbutton" value="Register">
         		</form>
-            
+
           </div>
         </label>
       </div>

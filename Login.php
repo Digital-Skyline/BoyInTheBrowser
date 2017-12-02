@@ -14,9 +14,9 @@ require_once "Login.php";
       $pw_temp = mysql_entities_fix_string($connection, $_SERVER['PHP_AUTH_PW']);
       $query = "SELECT * FROM users WHERE username='$un_temp'";
       $result = $connection->query($query);
-      if (!$result){ 
+      if (!$result){
         die($connection->error);
-      
+
       }elseif($result->num_rows){
         $row = $result->fetch_array(MYSQLI_NUM);
         $result->close();
@@ -83,7 +83,8 @@ echo <<<_END
     </head>
 
     <body>
-      <div class="loginbtn"><a href="Main.html">Home</a></div>
+      <div class="loginbtn"><a href="index.php">Home</a></div>
+      <div class="loginbtn"><a href="Register.php">Register</a></div>
 
       <h2>Let the Boy in your Browser keep you secure!</h2>
       <p class="lead">Analyze suspicious files to find Malware.</p>
