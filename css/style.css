@@ -147,7 +147,6 @@ p {
   width: 75%;
 }
 .login-form input {
-  float: left;
   clear: both;
   width: 100%;
   padding: 1rem;
