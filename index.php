@@ -1,19 +1,10 @@
 <?php
 
-echo <<<_END
-  <html>
-    <head>
-      <meta charset="UTF-8">
-      <title>Boy in the Browser</title>
-
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-      <link rel="stylesheet" href="css/style.css">
-    </head>
+$title = 'Boy In The Browser';
+require('layout/header.php');
+?>
 
     <body>
-      <div class="loginbtn"><a href="Login.php">Login</a></div>
-      <div class="loginbtn"><a href="Register.php">Register</a></div>
-
       <h2>Let the Boy in your Browser keep you secure!</h2>
       <p class="lead">Analyze suspicious files to find Malware.</p>
 
@@ -29,9 +20,8 @@ echo <<<_END
           </div>
         </label>
       </form>
-
-      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     </body>
-  </html>
-_END;
+
+<?php
+  require('layout/footer.php');
 ?>

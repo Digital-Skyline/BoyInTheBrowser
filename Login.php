@@ -1,5 +1,4 @@
 <?php
-require_once "Login.php";
     $hn = 'localhost';
     $db = 'files';
     $un = 'admin';
@@ -37,6 +36,8 @@ require_once "Login.php";
       header('HTTP/1.0 401 Unauthorized');
       die ("Please enter your username and password");
     }
+
+
 /**if((isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['password']) && !empty($_POST['password']))){
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -71,7 +72,9 @@ require_once "Login.php";
     }
     $result->close();
     $conn->close();
-}/**
+}**/
+
+
 echo <<<_END
   <html>
     <head>
@@ -83,8 +86,6 @@ echo <<<_END
     </head>
 
     <body>
-      <div class="loginbtn"><a href="index.php">Home</a></div>
-      <div class="loginbtn"><a href="Register.php">Register</a></div>
 
       <h2>Let the Boy in your Browser keep you secure!</h2>
       <p class="lead">Analyze suspicious files to find Malware.</p>
