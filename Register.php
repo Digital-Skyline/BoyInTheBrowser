@@ -43,13 +43,13 @@
     <div id="start">
         <i class="fa fa-sign-in " aria-hidden="true"></i>
     		<h2>Register</h2>
-    		<form action="php/insert.php" method="POST" class="login-form" enctype="multipart/form-data">
+    		<form action="php/insert.php" method="POST" class="login-form" onsubmit="return validate(this)">
     		    <input type="text" id="username" placeholder="Username" name="username" onkeyup="checkname();">
               <span style="font-size: 10px" id="name_status" value="<?php echo $isTaken; ?>"></span><br>
             <input type="email" id="email" email="email" placeholder="Email" name="email" onkeyup="checkemail();" >
               <span style="font-size: 10px" id="email_status" value="<?php echo $isTakenE; ?>"></span><br>
 			      <input type="password" id="password" placeholder="Password" name="password" onkeyup="checkpass();">
-            <input type="submit" id="submit" name="reg_user" class="submitbutton" value="Register">
+            <input type="submit" id="submit" name="submit" class="submitbutton" value="Register">
     		</form>
     </div>
   </label>
