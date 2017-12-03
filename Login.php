@@ -1,6 +1,6 @@
 <?php
   require('include/config.php');
-  include('utility.php');
+  include('php/utility.php');
   session_start();
 
   if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -44,7 +44,7 @@
 
 
 $title = 'BiB : Login';
-require('layout/header.php');
+require('php/header.php');
 ?>
 
   <body>
@@ -69,5 +69,5 @@ require('layout/header.php');
   </body>
 
 <?php
-  require('layout/footer.php');
+  require('php/footer.php');
 ?>

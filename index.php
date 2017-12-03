@@ -1,7 +1,7 @@
 <?php
-  require('session.php');
+  require('php/session.php');
   $title = 'Boy In The Browser';
-  require('layout/header.php');
+  require('php/header.php');
 ?>
 
   <body>
@@ -23,5 +23,5 @@
   </body>
 
 <?php
-  require('layout/footer.php');
+  require('php/footer.php');
 ?>

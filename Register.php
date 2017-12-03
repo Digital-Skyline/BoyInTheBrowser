@@ -1,6 +1,6 @@
 <?php
 $title = 'BiB : Regsiter';
-require('layout/header.php');
+require('php/header.php');
 
   $isTaken = "";
   $isTakenE = "";
@@ -70,84 +70,29 @@ require('layout/header.php');
   }
 ?>
 
-    <script type="text/javascript" src="jquery-1.11.3-jquery.min.js"></script>
-    <script type="text/javascript">
+<body>
+  <h2>Let the Boy in your Browser keep you secure!</h2>
+  <p class="lead">Analyze suspicious files to find Malware.</p>
 
-    function checkname(){
-        var name=document.getElementById("username").value;
-
-        if(name){
-            $.ajax({
-                type: 'post',
-                url: 'Register.php',
-                data: {
-                username:name,
-                },
-                success: function (response) {
-                    $('#name_status').html(response);
-                    if(response=="OK") {
-                        return true;
-                    }else{
-                        return false;
-                    }
-                }
-            });
-        }else{
-            $('#name_status').html("");
-            return false;
-        }
-    }
-    function checkemail(){
-        var emailE=document.getElementById("email").value;
-
-        if(emailE){
-            $.ajax({
-                type: 'post',
-                url: 'Register.php',
-                data: {
-                  email:emailE,
-                },
-                success: function (response) {
-                    $('#email_status').html(response);
-                    if(response=="OK"){
-                        return true;
-                    }else{
-                        return false;
-                    }
-                }
-            });
-        }else{
-            $('#email_status').html("");
-            return false;
-        }
-    }
-
-    </script>
-
-    <h2>Let the Boy in your Browser keep you secure!</h2>
-    <p class="lead">Analyze suspicious files to find Malware.</p>
-
-    <!-- Register  -->
-    <div class="uploader">
-    <label>
-        <div id="start">
-            <i class="fa fa-sign-in " aria-hidden="true"></i>
-        		<h2>Register</h2>
-        		<form action="" method="POST" class="login-form" enctype="multipart/form-data">
-        		    <input type="text" id="username" placeholder="Username" name="username" onkeyup="checkname();">
-                    <span style="font-size: 10px" id="name_status" value="<?php echo $isTaken; ?>"></span><br>
-                    <input type="email" id="email" email="email" placeholder="Email" name="email" onkeyup="checkemail();" >
-                    <span style="font-size: 10px" id="email_status" value="<?php echo $isTakenE; ?>"></span><br>
-        			      <input type="password" id="password" placeholder="Password" name="password">
-                    <input type="submit" id="submitButton" name="submit" class="submitbutton" value="Register">
-        		</form>
-        </div>
-    </label>
+  <!-- Register  -->
+  <div class="uploader">
+  <label>
+    <div id="start">
+        <i class="fa fa-sign-in " aria-hidden="true"></i>
+    		<h2>Register</h2>
+    		<form action="" method="POST" class="login-form" enctype="multipart/form-data">
+    		    <input type="text" id="username" placeholder="Username" name="username" onkeyup="checkname();">
+            <span style="font-size: 10px" id="name_status" value="<?php echo $isTaken; ?>"></span><br>
+            <input type="email" id="email" email="email" placeholder="Email" name="email" onkeyup="checkemail();" >
+            <span style="font-size: 10px" id="email_status" value="<?php echo $isTakenE; ?>"></span><br>
+			      <input type="password" id="password" placeholder="Password" name="password">
+            <input type="submit" id="submitButton" name="submit" class="submitbutton" value="Register">
+    		</form>
     </div>
-
-    </body>
-</html>
+  </label>
+  </div>
+</body>
 
 <?php
-  require('layout/footer.php');
+  require('php/footer.php');
 ?>
