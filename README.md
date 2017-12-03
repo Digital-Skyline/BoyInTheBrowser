@@ -24,3 +24,12 @@ __If your group is formed by two or three people, you have to add these requirem
 * The website will let register a user to the website as a contributor, asking for username, email and password.
 * When a registered user log in on the website, s/he can upload a surely infected file and the relative signature is stored in a different table containing putative malware that must be double checked by an Admin.
 * NOTE: This table is NOT the same used to upload signatures from files uploaded by an Admin. That is, it's not the table used to check if a file is infected or not.
+
+__Other__:
+* Encase all html in 'END'
+* Sanitize all strings
+* Validate any input in JS
+* Do not specify whether the password or username is incorrect. Be generic.
+* Salt/Hash all passwords
+* Regenerate session ID manually?
+* Initialize all variables that are used

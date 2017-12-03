@@ -170,7 +170,7 @@ p {
 }
 /* End Login Page */
 
-
+/* Start Footer */
 footer {
   text-align: center;
   width: 98%;
@@ -183,3 +183,4 @@ footer p {
 	font-size: 14px;
 	letter-spacing: .4px;
 }
+/* End Footer */

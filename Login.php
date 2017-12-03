@@ -23,11 +23,6 @@
         echo $error;
      }
   }
-  // else{
-  //   header('WWW-Authenticate: Basic realm="Restricted Section"');
-  //   header('HTTP/1.0 401 Unauthorized');
-  //   die ("Please enter your username and password");
-  // }
 
   // if(isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PWD'])){
   //   elseif($result->num_rows){
@@ -48,7 +43,7 @@
 
 
 
-$title = 'Boy In The Browser';
+$title = 'BiB : Login';
 require('layout/header.php');
 ?>
 
@@ -61,7 +56,7 @@ require('layout/header.php');
       <label>
           <div id="start">
           <i class="fa fa-sign-in " aria-hidden="true"></i>
-      		<h1>Welcome</h1>
+      		<h2>Welcome</h2>
       		<form action="Login.php" method="POST" class="login-form" enctype="multipart/form-data">
       			<input type="text" placeholder="Username" name="username">
       			<input type="password" placeholder="Password" name="password">
