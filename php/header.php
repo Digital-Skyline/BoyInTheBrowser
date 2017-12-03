@@ -12,7 +12,7 @@
 <?php
 if (isset($_SESSION['active']) && $_SESSION['active'] == true) {
 echo <<<_END
-  <a href="logout.php">Logout</a>
+  <a href="php/logout.php">Logout</a>
 _END;
 } else {
 echo <<<_END
