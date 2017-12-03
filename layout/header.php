@@ -10,7 +10,6 @@
 
 <div class="loginbtn">
 <?php
-
 if (isset($_SESSION['active']) && $_SESSION['active'] == true) {
 echo <<<_END
   <a href="logout.php">Logout</a>

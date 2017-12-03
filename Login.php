@@ -14,7 +14,7 @@
      // Do we need to kill connection here if result is false?
      if($result->num_rows == 1) {
         $result->close();
-        $_SESSION['login_user'] = $myusername;
+        $_SESSION['login_user'] = $un_temp;
         $_SESSION['active'] = true;
 
         header("location: index.php");
@@ -23,11 +23,11 @@
         echo $error;
      }
   }
-  else{
-    header('WWW-Authenticate: Basic realm="Restricted Section"');
-    header('HTTP/1.0 401 Unauthorized');
-    die ("Please enter your username and password");
-  }
+  // else{
+  //   header('WWW-Authenticate: Basic realm="Restricted Section"');
+  //   header('HTTP/1.0 401 Unauthorized');
+  //   die ("Please enter your username and password");
+  // }
 
   // if(isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PWD'])){
   //   elseif($result->num_rows){
