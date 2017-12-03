@@ -1,4 +1,5 @@
 <?php
+
 function mysql_entities_fix_string($conn, $string){
   return htmlentities(mysql_fix_string($conn, $string));
 }
@@ -6,5 +7,15 @@ function mysql_entities_fix_string($conn, $string){
 function mysql_fix_string($conn, $string){
   if (get_magic_quotes_gpc()) $string = stripslashes($string);
   return $conn->real_escape_string($string);
+}
+
+function isValidUsername($username){
+  if (strlen($username) < $min_un) return false;
+  if (strlen($username) > $max_un) return false;
+  return true;
+}
+
+function registerUser() {
+
 }
 ?>

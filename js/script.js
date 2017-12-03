@@ -1,5 +1,7 @@
+// Need to add validate functions
+
 function checkname() {
-    var name=document.getElementById("username").value;
+    var name = document.getElementById("username").value;
 
     if(name){
         $.ajax({
@@ -24,7 +26,7 @@ function checkname() {
 }
 
 function checkemail() {
-    var emailE=document.getElementById("email").value;
+    var emailE = document.getElementById("email").value;
 
     if(emailE){
         $.ajax({
@@ -46,4 +48,8 @@ function checkemail() {
         $('#email_status').html("");
         return false;
     }
+}
+
+function checkpass() {
+
 }
