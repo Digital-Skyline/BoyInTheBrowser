@@ -1,17 +1,19 @@
 <?php
   require('include/config.php');
+  include('utility.php');
   session_start();
 
   if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-     $myusername = mysqli_real_escape_string($db, $_POST['username']);
-     $mypassword = mysqli_real_escape_string($db, $_POST['password']);
-
-     $sql = "SELECT * FROM users WHERE username = '$myusername' and password = '$mypassword'";
-     $result = $db->query($sql);
+     $un_temp = mysql_entities_fix_string($db, $_POST['username']);
+     $pw_temp = mysql_entities_fix_string($db, $_POST['password']);
+     $query = "SELECT * FROM users WHERE username='$un_temp'";
+     $result = $db->query($query);
      //$active = $row['active'];
 
+     // Do we need to kill connection here if result is false?
      if($result->num_rows == 1) {
+        $result->close();
         $_SESSION['login_user'] = $myusername;
         $_SESSION['active'] = true;
 
@@ -21,39 +23,30 @@
         echo $error;
      }
   }
+  else{
+    header('WWW-Authenticate: Basic realm="Restricted Section"');
+    header('HTTP/1.0 401 Unauthorized');
+    die ("Please enter your username and password");
+  }
 
-    // $conn = new mysqli($hn, $un, $pw, $db);
-    // if ($conn->connect_error) die($conn->connect_error);
-    //
-    // if(isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PWD'])){
-    //
-    //   $un_temp = mysql_entities_fix_string($connection, $_SERVER['PHP_AUTH_USER']);
-    //   $pw_temp = mysql_entities_fix_string($connection, $_SERVER['PHP_AUTH_PW']);
-    //   $query = "SELECT * FROM users WHERE username='$un_temp'";
-    //   $result = $connection->query($query);
-    //   if (!$result){
-    //     die($connection->error);
-    //
-    //   }elseif($result->num_rows){
-    //     $row = $result->fetch_array(MYSQLI_NUM);
-    //     $result->close();
-    //     $salt1 = "qm&h*";
-    //     $salt2 = "pg!@";
-    //     $token = hash('ripemd128', "$salt1$pw_temp$salt2");
-    //
-    //     if($token == $row[3]){
-    //       echo "$row[0] $row[1] : Hi $row[0], you are now logged in as '$row[2]'";
-    //     }else{
-    //       die("Invalid username/password combination");
-    //     }
-    //   }else{
-    //     die("Invalid username/password combination");
-    //   }
-    // }else{
-    //   header('WWW-Authenticate: Basic realm="Restricted Section"');
-    //   header('HTTP/1.0 401 Unauthorized');
-    //   die ("Please enter your username and password");
-    // }
+  // if(isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PWD'])){
+  //   elseif($result->num_rows){
+  //     $row = $result->fetch_array(MYSQLI_NUM);
+  //     //$result->close();
+  //     $salt1 = "qm&h*";
+  //     $salt2 = "pg!@";
+  //     $token = hash('ripemd128', "$salt1$pw_temp$salt2");
+  //
+  //     if($token == $row[3]){
+  //       echo "$row[0] $row[1] : Hi $row[0], you are now logged in as '$row[2]'";
+  //     }
+  //     else{
+  //       die("Invalid username/password combination");
+  //     }
+  //   }
+  // }
+
+
 
 $title = 'Boy In The Browser';
 require('layout/header.php');
