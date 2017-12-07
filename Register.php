@@ -5,10 +5,10 @@
   require('php/header.php');
 
   $isTaken = $isTakenE = $isTakenP = "";
-  if ($db->connect_error) die($db->connect_error);
+  $username = $email = $password = "";
+  $checkData = "";
 
   if(isset($_POST['username'])){
-      $username = $_POST['username'];
       $username = mysql_entities_fix_string($db, $_POST['username']);
       $checkdata = $db->query("SELECT username FROM users WHERE username = '$username'");
 
@@ -16,11 +16,9 @@
           echo "User Name Already Exist";
       }
       else{ echo "OK"; }
-      exit();
   }
 
   if(isset($_POST['email'])){
-      $email=$_POST['email'];
       $email = mysql_entities_fix_string($db, $_POST['email']);
       $checkdata = $db->query("SELECT email FROM users WHERE email='$email'");
 
@@ -28,14 +26,21 @@
           echo "Email Already Exist";
       }
       else{ echo "OK"; }
-      exit();
+    }
+    if (isset($_POST['password'])) {
+      $password = mysql_entities_fix_string($db, $_POST['password']);
     }
 
+    // Maybe not necessary
+    $fail = validate_Username($username);
+    $fail .= validate_Email($email);
+    $fail .= validate_Password($password);
+    if ($fail == "") { exit; }
 ?>
 
 <body>
   <h2>Let the Boy in your Browser keep you secure!</h2>
-  <p class="lead">Analyze suspicious files to find Malware.</p>
+  <p class="lead">Analyze suspicious files to find Malware.</p> 
 
   <!-- Register  -->
   <div class="uploader">
@@ -51,6 +56,7 @@
 			      <input type="password" id="password" placeholder="Password" name="password" onkeyup="checkpass();">
             <input type="submit" id="submit" name="submit" class="submitbutton" value="Register">
     		</form>
+        <div class="regErrors">The following errors where found:<br><?php $fail ?></div>
     </div>
   </label>
   </div>

@@ -22,7 +22,7 @@ function validateEmail(field) {
   return "";
 }
 
-function validatePassword() {
+function validatePassword(field) {
   if (field == "") { return "No password was entered.\n"; }
   else if (field.length < 6) {
     return "Password must be at least 6 characters.\n"; }
@@ -38,7 +38,7 @@ function checkname() {
     if(name){
         $.ajax({
             type: 'post',
-            url: 'Register.php',
+            url: 'register.php',
             data: {
             username:name,
             },
