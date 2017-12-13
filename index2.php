@@ -53,9 +53,15 @@
               }
             }
             if($isMalware){
-              echo "Malware: YES — name: " .$malware[0] ;
+              $message = "Malware: YES". "\\n"."Name    : " .$malware[0];
+              echo "<script type=\"text/javascript\">".
+                      "alert('$message');".
+                   "</script>";
+              //echo "Malware: YES — name: " .$malware[0] ;
             }else{
-              echo "Not a Malware";
+              echo "<script type=\"text/javascript\">".
+                      "alert('File entered is NOT infected');".
+                   "</script>";
             }
           }
         }

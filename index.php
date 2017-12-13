@@ -43,18 +43,35 @@
           //Sanitize contents of the file
           $bytes100file = mysql_entities_fix_string($db, trim($bytes100file));
 
-          //Must check if contents are string a-Z and digits
+          //Must check if contents are string a-Z and digits 0-9 as per project's instruction
           if(preg_match('/[^A-Za-z0-9]/', $bytes100file)){
 
-            $query = "INSERT INTO files VALUES('$malware', '$bytes100file')";
-            $result = $db->query($query);
-
             //Do we have to check if malware already exists in the database?
-            if($result){
-              echo $malware. " is uploaded in the database";
+            $queryCheckIfMalwareExists = "SELECT * FROM files WHERE nameMalware='$malware'";
+            $resultMalwareCheck = $db->query($queryCheckIfMalwareExists);
+            
+            if($resultMalwareCheck->num_rows > 0){//This mean that malware already exists
+              $message = $malware. " alreadt exists in the database";
+                echo "<script type=\"text/javascript\">".
+                    "alert('$message');".
+                    "</script>";
+            }else{
+              
+              $query = "INSERT INTO files VALUES('$malware', '$bytes100file')";
+              $result = $db->query($query);
+              if($result){
+                $message = $malware. " is uploaded in the database";
+                echo "<script type=\"text/javascript\">".
+                    "alert('$message');".
+                    "</script>";
+              }
             }
+            
           }else{
-            echo "Contents in the file must be string or digits only";
+            $message = "Contents in the file must be string or digits only";
+            echo "<script type=\"text/javascript\">".
+                  "alert('$message');".
+                  "</script>";
           }
         }
       }
