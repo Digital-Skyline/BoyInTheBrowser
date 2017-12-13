@@ -1,0 +1,1 @@
+RansomCryptolocker is a Trojan horse that encrypts files on the compromised computer and then prompts the user to purchase a password in order to decrypt them
