@@ -1,6 +1,6 @@
 <?php
   require('include/config.php');
-  include('php/utility.php');
+  include('php/utility.php'); 
   $title = 'BiB : Regsiter';
   require('php/header.php');
 
@@ -11,17 +11,14 @@
   if(isset($_POST['username'])){
       $username = mysql_entities_fix_string($db, $_POST['username']);
       $checkdata = $db->query("SELECT username FROM users WHERE username = '$username'");
-
       if($checkdata->num_rows > 0){
           echo "User Name Already Exist";
       }
       else{ echo "OK"; }
   }
-
   if(isset($_POST['email'])){
       $email = mysql_entities_fix_string($db, $_POST['email']);
       $checkdata = $db->query("SELECT email FROM users WHERE email='$email'");
-
       if($checkdata->num_rows > 0){
           echo "Email Already Exist";
       }
@@ -30,7 +27,6 @@
     if (isset($_POST['password'])) {
       $password = mysql_entities_fix_string($db, $_POST['password']);
     }
-
     // Maybe not necessary
     $fail = validate_Username($username);
     $fail .= validate_Email($email);
@@ -47,16 +43,16 @@
   <label>
     <div id="start">
         <i class="fa fa-sign-in " aria-hidden="true"></i>
-    		<h2>Register</h2>
-    		<form action="php/insert.php" method="POST" class="login-form" onsubmit="return validate(this)">
-    		    <input type="text" id="username" placeholder="Username" name="username" onkeyup="checkname();">
+        <h2>Register</h2>
+        <form action="php/insert.php" method="POST" class="login-form" onsubmit="return validate(this)">
+            <input type="text" id="username" placeholder="Username" name="username">
               <span style="font-size: 10px" id="name_status" value="<?php echo $isTaken; ?>"></span><br>
-            <input type="email" id="email" email="email" placeholder="Email" name="email" onkeyup="checkemail();" >
+            <input type="email" id="email" email="email" placeholder="Email" name="email">
               <span style="font-size: 10px" id="email_status" value="<?php echo $isTakenE; ?>"></span><br>
-			      <input type="password" id="password" placeholder="Password" name="password" onkeyup="checkpass();">
+            <input type="password" id="password" placeholder="Password" name="password">
             <input type="submit" id="submit" name="submit" class="submitbutton" value="Register">
-    		</form>
-        <div class="regErrors">The following errors where found:<br><?php $fail ?></div>
+        </form>
+        <!-- <div class="regErrors">The following errors where found:<br><?php $fail ?></div>-->
     </div>
   </label>
   </div>
