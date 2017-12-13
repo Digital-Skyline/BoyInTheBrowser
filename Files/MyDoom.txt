@@ -1,0 +1,1 @@
+The MyDoom or Novarg virus is another worm that can create a backdoor in the victim computer's operating system
