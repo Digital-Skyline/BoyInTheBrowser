@@ -88,10 +88,10 @@
   }
 
   if(isset($_FILES['file2']) and isset($_POST['malware'])){
+ 
     $file = $_FILES['file2'];
     $malware = $_POST['malware'];
-    
-    echo $malware . $file['name'];
+  
     //File properties
     $file_name = $file['name'];
     $file_tmp = $file['tmp_name'];
@@ -103,16 +103,15 @@
     $file_ext = strtolower(end($file_ext));
 
     //Assure that only txt files are allowed
-    echo "File". $file_name. " error: ". $file_error;
+    
     $allowed = array('txt');
     if(in_array($file_ext, $allowed)){   
-      echo "Enter allowed"; 
       if($file_error === 0) {
         //1 byte can store a character; must check the first 20 bytes
         if($file_size >= 20){
           $file_name_new = uniqid('', true) . '.' . $file_ext;
           //echo "Enter file size";
-          $filecontents = file_get_contents($_FILES['file']['tmp_name']);
+          $filecontents = file_get_contents($_FILES['file2']['tmp_name']);
           $words = preg_split('/[\s]+/', $filecontents, -1, PREG_SPLIT_NO_EMPTY);
 
           $bytes20file = "";
@@ -129,7 +128,6 @@
 
           //Must check if contents are string a-Z and digits 0-9 as per project's instruction
           if(preg_match('/[^A-Za-z0-9]/', $bytes20file)){
-            echo "Enterif";
             //Do we have to check if malware already exists in the database?
             $queryCheckIfMalwareExists = "SELECT * FROM malware WHERE name='$malware'";
             $resultMalwareCheck = $db->query($queryCheckIfMalwareExists);
@@ -141,7 +139,7 @@
                     "</script>";
             }else{
 
-              $query = "INSERT INTO malware VALUES('$malware', '$bytes100file')";
+              $query = "INSERT INTO malware VALUES('$malware', '$bytes20file')";
               $result = $db->query($query);
               if($result){
                 $message = $malware. " is uploaded in the database";
@@ -221,8 +219,8 @@
     <!-- First tab: to inspect a putative file-->
     <div id="putative" class="tabcontent">
       <form method="POST" enctype="multipart/form-data" class="uploader">
-        <input id="file-upload" type="file" name="file1" >
-        <label for="file-upload">
+        <input id="file-upload1" type="file" name="file1" >
+        <label for="file-upload1">
           <img id="file-image" src="#" alt="Preview" class="hidden">
           <div id="start">
             <i class="fa fa-cloud-upload" aria-hidden="true"></i>
@@ -235,9 +233,9 @@
 
     <!-- Second tab: to upload a malware in the databse-->
     <div id="infected" class="tabcontent">
-      <form method="POST" enctype="multipart/form-data" class="uploader">
-        <input id="file-upload" type="file" name="file2" >
-        <label for="file-upload">
+      <form id="file-upload-form"  method="POST" enctype="multipart/form-data" class="uploader">
+        <input id="file-upload2" type="file" name="file2" >
+        <label for="file-upload2">
           <img id="file-image" src="#" alt="Preview" class="hidden">
           <div id="start">
             <i class="fa fa-cloud-upload" aria-hidden="true"></i>
