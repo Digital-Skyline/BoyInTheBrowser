@@ -17,6 +17,8 @@
     $file_ext = strtolower(end($file_ext));
 
     //Assure that only txt files are allowed
+    //Instruction did not specify if the program can only take text file
+    //So, in this program, we assume that it can only take text files.
     $allowed = array('txt');
     if(in_array($file_ext, $allowed)){
       if($file_error === 0) {
@@ -34,7 +36,7 @@
             $bytes20file = $filecontents;
           }
   
-          $query = "SELECT * FROM files";
+          $query = "SELECT * FROM malware";
           $result = $db->query($query);
         
           if($result->num_rows > 0) {
@@ -43,8 +45,6 @@
 
             foreach($row as $malware){
               $bytes20Malware = substr($malware[1], 0, 20);
-              //echo $bytes20Malware ."<br>";
-              //echo $bytes20file ."<br>";
               if($bytes20file == $bytes20Malware){
                 $isMalware = true;
                 break;
@@ -52,6 +52,7 @@
                 $isMalware = false;
               }
             }
+
             if($isMalware){
               $message = "Malware: YES". "\\n"."Name    : " .$malware[0];
               echo "<script type=\"text/javascript\">".
@@ -59,6 +60,19 @@
                    "</script>";
               //echo "Malware: YES — name: " .$malware[0] ;
             }else{
+              //Save putative infected file in the database
+              $malware = preg_replace('/\\.[^.\\s]{3,4}$/', '', $file_name);
+
+              //Check if putative file already exists
+              $query = "SELECT * FROM putative_malware WHERE name='$malware' AND signature='$bytes20file'";
+              $result = $db->query($query);
+
+              //If it doesn't exists, then we store it in the database
+              if(!$result->num_rows > 0){
+                $query = "INSERT INTO putative_malware VALUES('$malware', '$bytes20file')";
+                $result = $db->query($query);
+              }
+              
               echo "<script type=\"text/javascript\">".
                       "alert('File entered is NOT infected');".
                    "</script>";
@@ -72,8 +86,7 @@
 
   <body>
     <h2>Let the Boy in your Browser keep you secure!</h2>
-    <p class="lead">Analyze suspicious files to find Malware.</p>
-    
+    <p class="lead">Analyze suspicious files to find Malware.<br><br><?php echo "User: ".$_SESSION['login_user'];?></p>
     <!-- Upload  -->
     <form id="file-upload-form" method="POST" enctype="multipart/form-data" class="uploader">
       <input id="file-upload" type="file" name="file" >
@@ -81,7 +94,7 @@
         <img id="file-image" src="#" alt="Preview" class="hidden">
         <div id="start">
           <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-          <div>Select a file (drag here not working)</div>
+          <div>Select a putative file (drag here not working)</div>
         </div>
       </label>
       <button id="file-upload-btn" type="submit" class="btn btn-primary">Submit</span>
