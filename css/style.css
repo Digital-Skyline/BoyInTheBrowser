@@ -50,7 +50,7 @@ p {
   float: left;
   clear: both;
   width: 100%;
-  padding: 2rem 1.5rem;
+  padding: 2.5rem 0rem 1.0rem 0rem;
   text-align: center;
   background: #fff;
   border: 2px solid #c9c6c6;
@@ -107,7 +107,7 @@ p {
 }
 .uploader .btn {
   display: inline-block;
-  margin: .5rem .5rem 1rem .5rem;
+  margin: 1.5rem .5rem 1rem .5rem;
   clear: both;
   font-family: inherit;
   font-weight: 700;
@@ -235,5 +235,9 @@ footer p {
   display: none;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
+}
+
+.malwareName {
+  border-radius: 3px;
 }
 /* End Tabs */

@@ -186,8 +186,8 @@
             <i class="fa fa-cloud-upload" aria-hidden="true"></i>
             <div>Select a putative file (drag here not working)</div>
           </div>
+          <button id="file-upload-btn" type="submit" class="btn btn-primary">Submit</span>
         </label>
-        <button id="file-upload-btn" type="submit" class="btn btn-primary">Submit</span>
       </form>
     </div>
 
@@ -201,9 +201,9 @@
             <i class="fa fa-cloud-upload" aria-hidden="true"></i>
             <div>Select an infected file (drag here not working)</div>
           </div>
-          <div>Name of Malware:</div><input type="text" name="malware"><br>
+          <div>Name of Malware:</div><input type="text" name="malware" class="malwareName"><br>
+          <button id="file-upload-btn" type="submit" class="btn btn-primary">Submit</span>
         </label>
-        <button id="file-upload-btn" type="submit" class="btn btn-primary">Submit</span>
       </form>
     </div>
 
