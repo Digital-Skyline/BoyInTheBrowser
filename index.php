@@ -1,7 +1,7 @@
 <?php
   $title = 'Boy In The Browser';
-  require('php/header.php');
   require('php/session.php');
+  require('php/header.php');
   include('php/utility.php');
 
   $username = $_SESSION['login_user'];
@@ -159,21 +159,107 @@
       }
     }
   }
+
+  if(isset($_FILES['file3']) and isset($_POST['putative_malware'])){
+    $file = $_FILES['file3'];
+    $malware = $_POST['putative_malware'];
+
+    //File properties
+    $file_name = $file['name'];
+    $file_tmp = $file['tmp_name'];
+    $file_size = $file['size'];
+    $file_error = $file['error'];
+
+    //Work out the file extension
+    $file_ext = explode('.', $file_name);
+    $file_ext = strtolower(end($file_ext));
+
+    //Assure that only txt files are allowed
+
+    $allowed = array('txt');
+    if(in_array($file_ext, $allowed)){
+      if($file_error === 0) {
+        //1 byte can store a character; must check the first 20 bytes
+        if($file_size >= 20){
+          $file_name_new = uniqid('', true) . '.' . $file_ext;
+          //echo "Enter file size";
+          $filecontents = file_get_contents($_FILES['file3']['tmp_name']);
+          $words = preg_split('/[\s]+/', $filecontents, -1, PREG_SPLIT_NO_EMPTY);
+
+          $bytes20file = "";
+          if(strlen($filecontents) >= 20){
+            $bytes20file = substr($filecontents, 0, 20);
+          }else{
+            $bytes20file = $filecontents;
+          }
+
+          //Sanitize malware variable
+          $malware = mysql_entities_fix_string($db, trim($malware));
+          //Sanitize contents of the file
+          $bytes20file = mysql_entities_fix_string($db, trim($bytes20file));
+
+          //Must check if contents are string a-Z and digits 0-9 as per project's instruction
+          if(preg_match('/[^A-Za-z0-9]/', $bytes20file)){
+            //Do we have to check if malware already exists in the database?
+            $queryCheckIfMalwareExists = "SELECT * FROM putative_malware WHERE name='$malware'";
+            $resultMalwareCheck = $db->query($queryCheckIfMalwareExists);
+
+            if($resultMalwareCheck->num_rows > 0){//This mean that malware already exists
+              $message = $malware. " alreadt exists in the database";
+                echo "<script type=\"text/javascript\">".
+                    "alert('$message');".
+                    "</script>";
+            }else{
+
+              $query = "INSERT INTO putative_malware VALUES('$malware', '$bytes20file')";
+              $result = $db->query($query);
+              if($result){
+                $message = $malware. " is uploaded in the database";
+                echo "<script type=\"text/javascript\">".
+                    "alert('$message');".
+                    "</script>";
+              }
+            }
+
+          }else{
+            $message = "Contents in the file must be string or digits only";
+            echo "<script type=\"text/javascript\">".
+                  "alert('$message');".
+                  "</script>";
+          }
+        }
+      }
+    }
+  }
 ?>
 
   <body>
     <h2>Let the Boy in your Browser keep you secure!</h2>
-    <p class="lead">Analyze suspicious files to find Malware.<br><br>
-      <?php
+    <p class="lead">Analyze suspicious files to find Malware.</p>
+    <div class="welcomeUser">
+    <?php
         if ($_SESSION['admin'] == 1){
-          echo "Admin: ".$_SESSION['login_user'];
+          echo "Welcome, <strong>".$_SESSION['login_user']."</stong>";
         }else{
-          echo "Welcome, ".$_SESSION['login_user']."!";
-        }?></p>
-    <!-- Tabs for Admin -->
+          echo "Welcome, ".$_SESSION['login_user'];
+        }
+        ?>
+    </div>
+
     <div class="tab">
       <button class="tablinks" onclick="openTab(event, 'putative')" id="defaultOpen">Inspect a Putative File</button>
-      <button class="tablinks" onclick="openTab(event, 'infected')">Upload an Infected File</button>
+        <?php
+          if (isset($_SESSION['active']) && $_SESSION['active'] == true && $_SESSION['admin'] == 1) {
+echo <<<_END
+<button class="tablinks" onclick="openTab(event, 'infected')">Upload a Surely Infected File</button>
+_END;
+          }
+          if (isset($_SESSION['active']) && $_SESSION['active'] == true && $_SESSION['admin'] == 0) {
+echo <<<_END
+<button class="tablinks" onclick="openTab(event, 'putative_infected')">Upload a Putative Infected File</button>
+_END;
+          }
+        ?>
     </div>
 
     <!-- First tab: to inspect a putative file-->
@@ -191,7 +277,7 @@
       </form>
     </div>
 
-    <!-- Second tab: to upload a malware in the databse-->
+    <!-- Second tab: to upload a malware in the database-->
     <div id="infected" class="tabcontent">
       <form id="file-upload-form"  method="POST" enctype="multipart/form-data" class="uploader">
         <input id="file-upload2" type="file" name="file2" >
@@ -207,24 +293,22 @@
       </form>
     </div>
 
-    <!-- <script>
-      function openTab(evt, task) {
-          var i, tabcontent, tablinks;
-          tabcontent = document.getElementsByClassName("tabcontent");
-          for (i = 0; i < tabcontent.length; i++) {
-              tabcontent[i].style.display = "none";
-          }
-          tablinks = document.getElementsByClassName("tablinks");
-          for (i = 0; i < tablinks.length; i++) {
-              tablinks[i].className = tablinks[i].className.replace(" active", "");
-          }
-          document.getElementById(task).style.display = "block";
-          evt.currentTarget.className += " active";
-      }
-      document.getElementById("defaultOpen").click();
-    </script> -->
+    <!-- Third tab: to upload a putative malware in the database-->
+    <div id="putative_infected" class="tabcontent">
+      <form id="file-upload-form"  method="POST" enctype="multipart/form-data" class="uploader">
+        <input id="file-upload3" type="file" name="file3" >
+        <label for="file-upload3">
+          <img id="file-image" src="#" alt="Preview" class="hidden">
+          <div id="start">
+            <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+            <div>Select an infected file (drag here not working)</div>
+          </div>
+          <div>Name of Malware:</div><input type="text" name="putative_malware" class="malwareName"><br>
+          <button id="file-upload-btn" type="submit" class="btn btn-primary">Submit</span>
+        </label>
+      </form>
+    </div>
+
   </body>
 
-<?php
-  require('php/footer.php');
-?>
+<?php require('php/footer.php'); ?>

@@ -9,17 +9,26 @@
 </head>
 
 <div class="loginbtn">
+
+<div class="right">
 <?php
 if (isset($_SESSION['active']) && $_SESSION['active'] == true) {
 echo <<<_END
   <a href="php/logout.php">Logout</a>
 _END;
-} else {
+}
+
+else {
 echo <<<_END
   <a href="login.php">Login</a>
 _END;
 }
-?>
 
-<a href="index.php">Home</a>
+?>
+</div>
+
+<div class="left">
+  <a href="index.php">Home</a>
+</div>
+
 </div>
