@@ -4,8 +4,10 @@
   require('php/header.php');
   include('php/utility.php');
 
-  $username = $_SESSION['login_user'];
-  $admin = $_SESSION['admin'];
+  if(isset($_SESSION['login_user'])) {
+    $username = $_SESSION['login_user'];
+    $admin = $_SESSION['admin'];
+  }
 
   if(isset($_FILES['file1'])){
     $file = $_FILES['file1'];
@@ -87,7 +89,8 @@
     }
   }
 
-  if(isset($_FILES['file2']) and isset($_POST['malware'])){
+  if(isset($_FILES['file2']) and isset($_POST['malware']) and
+      isset($_SESSION['admin']) and $_SESSION['admin'] == 1) {
 
     $file = $_FILES['file2'];
     $malware = $_POST['malware'];
@@ -160,7 +163,9 @@
     }
   }
 
-  if(isset($_FILES['file3']) and isset($_POST['putative_malware'])){
+  if(isset($_FILES['file3']) and isset($_POST['putative_malware']) and
+      isset($_SESSION['login_user'])) {
+
     $file = $_FILES['file3'];
     $malware = $_POST['putative_malware'];
 
@@ -237,26 +242,28 @@
     <h2>Let the Boy in your Browser keep you secure!</h2>
     <p class="lead">Analyze suspicious files to find Malware.</p>
     <div class="welcomeUser">
-    <?php
-        if ($_SESSION['admin'] == 1){
-          echo "Welcome, <strong>".$_SESSION['login_user']."</stong>";
-        }else{
-          echo "Welcome, ".$_SESSION['login_user'];
-        }
+      <?php
+        if(isset($_SESSION['login_user'])) {
+            if ($_SESSION['admin'] == 1){
+              echo "Welcome, <strong>".$_SESSION['login_user']."</stong>";
+            }else{
+              echo "Welcome, ".$_SESSION['login_user'];
+            }
+          }
         ?>
-    </div>
+      </div>
 
     <div class="tab">
       <button class="tablinks" onclick="openTab(event, 'putative')" id="defaultOpen">Inspect a Putative File</button>
         <?php
           if (isset($_SESSION['active']) && $_SESSION['active'] == true && $_SESSION['admin'] == 1) {
 echo <<<_END
-<button class="tablinks" onclick="openTab(event, 'infected')">Upload a Surely Infected File</button>
+<button class="tablinks" onclick="openTab(event, 'infected')">Upload an Infected File</button>
 _END;
           }
           if (isset($_SESSION['active']) && $_SESSION['active'] == true && $_SESSION['admin'] == 0) {
 echo <<<_END
-<button class="tablinks" onclick="openTab(event, 'putative_infected')">Upload a Putative Infected File</button>
+<button class="tablinks" onclick="openTab(event, 'putative_infected')">Upload an Infected File</button>
 _END;
           }
         ?>
@@ -285,7 +292,7 @@ _END;
           <img id="file-image" src="#" alt="Preview" class="hidden">
           <div id="start">
             <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-            <div>Select an infected file (drag here not working)</div>
+            <div>Select a surely infected file (drag here not working)</div>
           </div>
           <div>Name of Malware:</div><input type="text" name="malware" class="malwareName"><br>
           <button id="file-upload-btn" type="submit" class="btn btn-primary">Submit</span>
@@ -301,7 +308,7 @@ _END;
           <img id="file-image" src="#" alt="Preview" class="hidden">
           <div id="start">
             <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-            <div>Select an infected file (drag here not working)</div>
+            <div>Select a putativelyinfected file (drag here not working)</div>
           </div>
           <div>Name of Malware:</div><input type="text" name="putative_malware" class="malwareName"><br>
           <button id="file-upload-btn" type="submit" class="btn btn-primary">Submit</span>

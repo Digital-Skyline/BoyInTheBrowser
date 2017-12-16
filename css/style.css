@@ -22,7 +22,7 @@ h2 {
   font-size: 28px;
   line-height: 1;
   color: #45aaad;
-  margin-bottom: 2% ;
+  margin-bottom: 3% ;
   margin-top: 0%;
 }
 
@@ -207,6 +207,8 @@ footer p {
 
 /* Start Tabs */
 .tab {
+  display: flex;
+  justify-content: center;
   margin: 0 auto;
   margin-top: 3%;
   width: 100%;
@@ -219,12 +221,13 @@ footer p {
 }
 
 .tab button {
+  flex-grow: 10;
   background-color: inherit;
   float: center;
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 10px 9.0%;
+  padding: 10px;
   transition: 0.3s;
   border-radius: 3px;
   font-size: 16px;

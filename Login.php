@@ -24,11 +24,6 @@
         $_SESSION['admin'] = $row[3];
 
         header("location: index.php");
-        // if($row[3] == "1"){//Admin User
-        //   header("location: index.php");
-        // }else{             //Regular User
-        //   header("location: index2.php");
-        // }
 
      }else {
         echo "Username or Password is invalid";

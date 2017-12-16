@@ -17,7 +17,6 @@ echo <<<_END
   <a href="php/logout.php">Logout</a>
 _END;
 }
-
 else {
 echo <<<_END
   <a href="login.php">Login</a>
