@@ -1,5 +1,5 @@
 <?php
-  $title = 'Boy IIIIn The Browser';
+  $title = 'Boy In The Browser';
   require('php/session.php');
   require('php/header.php');
   include('php/utility.php');
@@ -58,12 +58,12 @@ _END;
     <!-- First tab: to inspect a putative file-->
     <div id="putative" class="tabcontent">
       <form method="POST" enctype="multipart/form-data" class="uploader">
-        <input id="file-upload1" type="file" name="file1" >
         <label for="file-upload1">
           <img id="file-image" src="#" alt="Preview" class="hidden">
           <div id="start">
             <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-            <div>Select a putative file (drag here not working)</div>
+            <div>Select a putative malware file</div>
+            <input id="file-upload1" type="file" name="file1">
           </div>
           <button id="file-upload-btn" type="submit" class="btn btn-primary">Submit</span>
         </label>
@@ -78,7 +78,7 @@ _END;
           <img id="file-image" src="#" alt="Preview" class="hidden">
           <div id="start">
             <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-            <div>Select a surely infected file (drag here not working)</div>
+            <div>Select a surely infected malware file</div>
           </div>
           <div>Name of Malware:</div><input type="text" name="malware" class="malwareName"><br>
           <button id="file-upload-btn" type="submit" class="btn btn-primary">Submit</span>
@@ -94,7 +94,7 @@ _END;
           <img id="file-image" src="#" alt="Preview" class="hidden">
           <div id="start">
             <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-            <div>Select a putativelyinfected file (drag here not working)</div>
+            <div>Select a putatively infected malware file</div>
           </div>
           <div>Name of Malware:</div><input type="text" name="putative_malware" class="malwareName"><br>
           <button id="file-upload-btn" type="submit" class="btn btn-primary">Submit</span>

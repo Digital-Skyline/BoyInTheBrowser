@@ -97,7 +97,8 @@ p {
   display: none;
 }
 .uploader input[type="file"] {
-  display: none;
+  font-family: "Roboto", sans-serif;
+  opacity: 0;
 }
 .uploader div {
   margin: 0 0 .5rem 0;
@@ -127,6 +128,10 @@ p {
   border-color: #45aaad;
   cursor: pointer;
 }
+
+/* .uploader .inputBtn {
+  font-family: "Roboto", sans-serif;
+} */
 
 .loginbtn {
   display: block;
