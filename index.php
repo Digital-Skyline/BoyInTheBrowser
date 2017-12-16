@@ -3,7 +3,6 @@
   require('php/session.php');
   require('php/header.php');
   include('php/utility.php');
-  include('php/uploader.php');
 
   if(isset($_SESSION['login_user'])) {
     $username = $_SESSION['login_user'];
