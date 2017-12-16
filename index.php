@@ -168,7 +168,7 @@
         if ($_SESSION['admin'] == 1){
           echo "Admin: ".$_SESSION['login_user'];
         }else{
-          echo "User: ".$_SESSION['login_user'];
+          echo "Welcome, ".$_SESSION['login_user']."!";
         }?></p>
     <!-- Tabs for Admin -->
     <div class="tab">

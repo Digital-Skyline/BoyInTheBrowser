@@ -195,6 +195,7 @@ footer p {
 /* Start Tabs */
 .tab {
   margin: 0 auto;
+  margin-top: 3%;
   width: 100%;
   max-width: 600px;
   overflow: hidden;
@@ -219,7 +220,7 @@ footer p {
 }
 
 .tab button.active {
-  background-color: #ccc;
+  background-color: #45aaad;
 }
 
 .tabcontent {
