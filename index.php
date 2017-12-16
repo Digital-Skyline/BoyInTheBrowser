@@ -2,14 +2,14 @@
   $title = 'Boy In The Browser';
   require('php/header.php');
   require('php/session.php');
-  include('php/utility.php'); 
+  include('php/utility.php');
 
   $username = $_SESSION['login_user'];
   $admin = $_SESSION['admin'];
 
   if(isset($_FILES['file1'])){
     $file = $_FILES['file1'];
-   
+
     //File properties
     $file_name = $file['name'];
     $file_tmp = $file['tmp_name'];
@@ -39,10 +39,10 @@
           }else{
             $bytes20file = $filecontents;
           }
-  
+
           $query = "SELECT * FROM malware";
           $result = $db->query($query);
-        
+
           if($result->num_rows > 0) {
             $row = $result->fetch_all(MYSQLI_NUM);
             $isMalware = false;
@@ -76,7 +76,7 @@
                 $query = "INSERT INTO putative_malware VALUES('$malware', '$bytes20file')";
                 $result = $db->query($query);
               }
-              
+
               echo "<script type=\"text/javascript\">".
                       "alert('File entered is NOT infected');".
                    "</script>";
@@ -88,10 +88,10 @@
   }
 
   if(isset($_FILES['file2']) and isset($_POST['malware'])){
- 
+
     $file = $_FILES['file2'];
     $malware = $_POST['malware'];
-  
+
     //File properties
     $file_name = $file['name'];
     $file_tmp = $file['tmp_name'];
@@ -103,9 +103,9 @@
     $file_ext = strtolower(end($file_ext));
 
     //Assure that only txt files are allowed
-    
+
     $allowed = array('txt');
-    if(in_array($file_ext, $allowed)){   
+    if(in_array($file_ext, $allowed)){
       if($file_error === 0) {
         //1 byte can store a character; must check the first 20 bytes
         if($file_size >= 20){
@@ -131,7 +131,7 @@
             //Do we have to check if malware already exists in the database?
             $queryCheckIfMalwareExists = "SELECT * FROM malware WHERE name='$malware'";
             $resultMalwareCheck = $db->query($queryCheckIfMalwareExists);
-            
+
             if($resultMalwareCheck->num_rows > 0){//This mean that malware already exists
               $message = $malware. " alreadt exists in the database";
                 echo "<script type=\"text/javascript\">".
@@ -148,7 +148,7 @@
                     "</script>";
               }
             }
-            
+
           }else{
             $message = "Contents in the file must be string or digits only";
             echo "<script type=\"text/javascript\">".
@@ -160,51 +160,11 @@
     }
   }
 ?>
-<head>
-  <style>
-  body {font-family: Arial;}
-  /* Style the tab */
-  .tab {
-      overflow: hidden;
-      border: 2px solid #ccc;
-      background-color: #f8f8f8;
-  }
 
-  /* Style the buttons inside the tab */
-  .tab button {
-      background-color: inherit;
-      float: center;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      padding: 15px 15px;
-      transition: 0.3s;
-      font-size: 15px;
-  }
-
-  /* Change background color of buttons on hover */
-  .tab button:hover {
-      background-color: #ddd;
-  }
-
-  /* Create an active/current tablink class */
-  .tab button.active {
-      background-color: #ccc;
-  }
-
-  /* Style the tab content */
-  .tabcontent {
-      display: none;
-      padding: 6px 12px;
-      border: 1px solid #ccc;
-      border-top: none;
-  }
-  </style>
-</head>
   <body>
     <h2>Let the Boy in your Browser keep you secure!</h2>
     <p class="lead">Analyze suspicious files to find Malware.<br><br>
-      <?php 
+      <?php
         if ($_SESSION['admin'] == 1){
           echo "Admin: ".$_SESSION['login_user'];
         }else{
@@ -247,7 +207,7 @@
       </form>
     </div>
 
-    <script>
+    <!-- <script>
       function openTab(evt, task) {
           var i, tabcontent, tablinks;
           tabcontent = document.getElementsByClassName("tabcontent");
@@ -262,7 +222,7 @@
           evt.currentTarget.className += " active";
       }
       document.getElementById("defaultOpen").click();
-    </script>
+    </script> -->
   </body>
 
 <?php

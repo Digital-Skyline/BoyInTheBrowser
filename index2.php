@@ -2,6 +2,7 @@
   require('php/session.php');
   $title = 'Boy In The Browser';
   require('php/header.php');
+  include('php/utility.php');
 
   if(isset($_FILES['file'])){
     $file = $_FILES['file'];
@@ -35,10 +36,10 @@
           }else{
             $bytes20file = $filecontents;
           }
-  
+
           $query = "SELECT * FROM malware";
           $result = $db->query($query);
-        
+
           if($result->num_rows > 0) {
             $row = $result->fetch_all(MYSQLI_NUM);
             $isMalware = false;
@@ -72,7 +73,7 @@
                 $query = "INSERT INTO putative_malware VALUES('$malware', '$bytes20file')";
                 $result = $db->query($query);
               }
-              
+
               echo "<script type=\"text/javascript\">".
                       "alert('File entered is NOT infected');".
                    "</script>";
@@ -86,7 +87,9 @@
 
   <body>
     <h2>Let the Boy in your Browser keep you secure!</h2>
-    <p class="lead">Analyze suspicious files to find Malware.<br><br><?php echo "User: ".$_SESSION['login_user'];?></p>
+    <p class="lead">Analyze suspicious files to find Malware.<br><br><br>
+      <div class="welcomeUser"><?php echo "Welcome, ".$_SESSION['login_user']."!";?></div>
+    </p>
     <!-- Upload  -->
     <form id="file-upload-form" method="POST" enctype="multipart/form-data" class="uploader">
       <input id="file-upload" type="file" name="file" >
