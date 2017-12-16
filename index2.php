@@ -87,8 +87,8 @@
 
   <body>
     <h2>Let the Boy in your Browser keep you secure!</h2>
-    <p class="lead">Analyze suspicious files to find Malware.<br><br><br></p>
-      <div class="welcomeUser"><?php echo "Welcome, ".$_SESSION['login_user']."!";?></div>
+    <p class="lead">Analyze suspicious files to find Malware.</p>
+    <div class="welcomeUser"><?php echo "Welcome, ".$_SESSION['login_user']."!";?></div>
     <!-- Upload  -->
     <form id="file-upload-form" method="POST" enctype="multipart/form-data" class="uploader">
       <input id="file-upload" type="file" name="file" >

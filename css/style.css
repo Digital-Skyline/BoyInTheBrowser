@@ -30,6 +30,7 @@ p {
   font-family: "Roboto", sans-serif;
   font-size: 22px;
   color: #626262;
+  margin-bottom: 3%;
 }
 
 .welcomeUser {
@@ -42,7 +43,6 @@ p {
   display: block;
   clear: both;
   margin: 0 auto;
-  /* margin-top: 6%; */
   width: 100%;
   max-width: 600px;
 }
@@ -55,7 +55,6 @@ p {
   background: #fff;
   border: 2px solid #c9c6c6;
   border-radius: 3px;
-  border-top: none;
   -webkit-transition: all .2s ease;
   transition: all .2s ease;
   -webkit-user-select: none;
@@ -112,7 +111,7 @@ p {
   clear: both;
   font-family: inherit;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 16px;
   text-decoration: none;
   text-transform: initial;
   border: none;
@@ -177,6 +176,8 @@ p {
 }
 /* End Login Page */
 
+
+
 /* Start Footer */
 footer {
   text-align: center;
@@ -202,6 +203,7 @@ footer p {
   overflow: hidden;
   border: 2px solid #c9c6c6;
   border-radius: 3px;
+  border-bottom: none;
   background-color: #f8f8f8;
 }
 
@@ -211,10 +213,11 @@ footer p {
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 10px 12%;
+  padding: 10px 11.3%;
   transition: 0.3s;
-  font-size: 15px;
   border-radius: 3px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
 }
 
 .tab button:hover {
@@ -230,9 +233,7 @@ footer p {
   width: 100%;
   max-width: 600px;
   display: none;
-  /* padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  border-top: none; */
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
 }
 /* End Tabs */

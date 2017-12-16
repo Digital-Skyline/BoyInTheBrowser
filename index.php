@@ -188,7 +188,7 @@
           </div>
         </label>
         <button id="file-upload-btn" type="submit" class="btn btn-primary">Submit</span>
-        </form>
+      </form>
     </div>
 
     <!-- Second tab: to upload a malware in the databse-->
