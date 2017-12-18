@@ -13,7 +13,7 @@
 
 <div class="loginbtn">
 
-<div class="right">
+  <div class="right">
 <?php
 if (isset($_SESSION['active']) && $_SESSION['active'] == true) {
 echo <<<_END
@@ -27,10 +27,10 @@ _END;
 }
 
 ?>
-</div>
+  </div>
 
-<div class="left">
-  <a href="index.php">Home</a>
-</div>
+  <div class="left">
+    <a href="index.php">Home</a>
+  </div>
 
 </div>

@@ -1,5 +1,5 @@
 <?php
-  require('include/config.php');
+  require_once('include/config.php');
   include('php/utility.php');
   session_start();
 

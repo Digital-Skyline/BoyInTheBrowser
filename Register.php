@@ -1,8 +1,8 @@
 <?php
-  require('include/config.php');
-  include('php/utility.php'); 
+  require_once('include/config.php');
+  include('php/utility.php');
   $title = 'BiB : Regsiter';
-  require('php/header.php');
+  require_once('php/header.php');
 
   $isTaken = $isTakenE = $isTakenP = "";
   $username = $email = $password = "";
@@ -27,7 +27,6 @@
     if (isset($_POST['password'])) {
       $password = mysql_entities_fix_string($db, $_POST['password']);
     }
-    // Maybe not necessary
     $fail = validate_Username($username);
     $fail .= validate_Email($email);
     $fail .= validate_Password($password);
@@ -36,7 +35,7 @@
 
 <body>
   <h2>Let the Boy in your Browser keep you secure!</h2>
-  <p class="lead">Analyze suspicious files to find Malware.</p> 
+  <p class="lead">Analyze suspicious files to find Malware.</p>
 
   <!-- Register  -->
   <div class="uploader">
@@ -52,7 +51,7 @@
             <input type="password" id="password" placeholder="Password" name="password">
             <input type="submit" id="submit" name="submit" class="submitbutton" value="Register">
         </form>
-        <!-- <div class="regErrors">The following errors where found:<br><?php $fail ?></div>-->
+        <div class="regErrors">The following errors where found:<br><?php $fail?></div>
     </div>
   </label>
   </div>
