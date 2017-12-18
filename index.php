@@ -1,4 +1,8 @@
 <?php
+// CS 174 San Jose State University
+// Project Created By: Thomas Wilson, Paul Diaz, and Sandy Yi
+// December 17, 2017
+
   $title = 'Boy In The Browser';
   require('php/session.php');
   require('php/header.php');

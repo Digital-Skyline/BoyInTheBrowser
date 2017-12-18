@@ -207,6 +207,7 @@ footer p {
 
 /* Start Tabs */
 .tab {
+  font-family: "Roboto", sans-serif;
   display: flex;
   justify-content: center;
   margin: 0 auto;
@@ -221,6 +222,7 @@ footer p {
 }
 
 .tab button {
+  font-family: "Roboto", sans-serif;
   flex-grow: 10;
   background-color: inherit;
   float: center;
@@ -242,6 +244,7 @@ footer p {
 }
 
 .tabcontent {
+  font-family: "Roboto", sans-serif;
   margin: 0 auto;
   width: 100%;
   max-width: 600px;
@@ -250,6 +253,7 @@ footer p {
 }
 
 .malwareName {
+  font-family: "Roboto", sans-serif;
   border-radius: 3px;
 }
 /* End Tabs */
