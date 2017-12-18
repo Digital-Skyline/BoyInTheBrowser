@@ -31,8 +31,8 @@
     $fail .= validate_Email($email);
     $fail .= validate_Password($password);
     if ($fail == "") { exit; }
-?>
 
+echo <<<_END
 <body>
   <h2>Let the Boy in your Browser keep you secure!</h2>
   <p class="lead">Analyze suspicious files to find Malware.</p>
@@ -45,18 +45,16 @@
         <h2>Register</h2>
         <form action="php/insert.php" method="POST" class="login-form" onsubmit="return validate(this)">
             <input type="text" id="username" placeholder="Username" name="username">
-              <span style="font-size: 10px" id="name_status" value="<?php echo $isTaken; ?>"></span><br>
+              <span style="font-size: 10px" id="name_status" value="$isTaken;"></span><br>
             <input type="email" id="email" email="email" placeholder="Email" name="email">
-              <span style="font-size: 10px" id="email_status" value="<?php echo $isTakenE; ?>"></span><br>
+              <span style="font-size: 10px" id="email_status" value="$isTakenE;"></span><br>
             <input type="password" id="password" placeholder="Password" name="password">
             <input type="submit" id="submit" name="submit" class="submitbutton" value="Register">
         </form>
-        <div class="regErrors">The following errors where found:<br><?php $fail?></div>
     </div>
   </label>
   </div>
 </body>
-
-<?php
-  require('php/footer.php');
+_END;
+require('php/footer.php');
 ?>

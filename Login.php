@@ -32,8 +32,7 @@
 
 $title = 'BiB : Login';
 require('php/header.php');
-?>
-
+echo <<<_END
   <body>
     <h2>Let the Boy in your Browser keep you secure!</h2>
     <p class="lead">Analyze suspicious files to find Malware.</p>
@@ -54,5 +53,6 @@ require('php/header.php');
       </label>
     </div>
   </body>
-
-<?php require('php/footer.php'); ?>
+_END;
+require('php/footer.php');
+?>

@@ -26,13 +26,14 @@
       isset($_SESSION['login_user'])) {
         uploadPutative($db);
   }
-?>
 
+echo <<<_END
   <body>
     <h2>Let the Boy in your Browser keep you secure!</h2>
     <p class="lead">Analyze suspicious files to find Malware.</p>
     <div class="welcomeUser">
-      <?php
+_END;
+
         if(isset($_SESSION['login_user'])) {
             if ($_SESSION['admin'] == 1){
               echo "Welcome, <strong>".$_SESSION['login_user']."</stong>";
@@ -40,12 +41,12 @@
               echo "Welcome, ".$_SESSION['login_user'];
             }
           }
-        ?>
-      </div>
 
+echo <<<_END
+      </div>
     <div class="tab">
       <button class="tablinks" onclick="openTab(event, 'putative')" id="defaultOpen">Inspect a Putative File</button>
-        <?php
+_END;
           if (isset($_SESSION['active']) && $_SESSION['active'] == true && $_SESSION['admin'] == 1) {
 echo <<<_END
 <button class="tablinks" onclick="openTab(event, 'infected')">Upload an Infected File</button>
@@ -56,7 +57,8 @@ echo <<<_END
 <button class="tablinks" onclick="openTab(event, 'putative_infected')">Upload an Infected File</button>
 _END;
           }
-        ?>
+
+echo <<<_END
     </div>
 
     <!-- First tab: to inspect a putative file-->
@@ -107,5 +109,7 @@ _END;
     </div>
 
   </body>
+_END;
 
-<?php require('php/footer.php'); ?>
+require('php/footer.php');
+?>
